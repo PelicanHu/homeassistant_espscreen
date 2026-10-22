@@ -30,9 +30,11 @@ esp32:
   # compatible: a firmware built with this flag does not boot on rev3 silicon, and the other way round.
   # Checked on a real JC8012P4A1 (pull request #14); a panel that reports v3.0 or higher needs this set to false.
   engineering_sample: true
+  
   framework:
     advanced:
       execute_from_psram: true
+      flash_chip: generic
     sdkconfig_options:
       # The Wi-Fi co-processor's driver (esp_hosted): its own memory pool off and its task stack in PSRAM, so the
       # memory inside the chip stays for LVGL and the panel; the extra thread-local slot is what that driver asks
