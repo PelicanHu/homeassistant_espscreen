@@ -87,33 +87,32 @@ esphome:
     version: "${SCREEN_FIRMWARE_VERSION}"
   # Still under platformio_options, although ESPHome 2026.9 calls that deprecated and offers `esphome: build_flags`:
   # its LVGL only reads these flags when it writes lv_conf.h, and writes `LV_USE_SWITCH 0` over the other form.
-  platformio_options:
-    build_flags:
-      - -DLV_USE_SWITCH=1
-      # The sliders are all made in C++ now (a tile's strip, the blind's, the light and fan card's): ESPHome
-      # writes lv_conf.h from the widgets the YAML names, and since the brightness overlay left it there is no
-      # `slider:` left to name one (firmware 0.2.80).
-      - -DLV_USE_BAR=1
-      - -DLV_USE_SLIDER=1
-      # The band of a heat/cool range in the thermostat card (firmware 0.25.0) is LVGL's scale; the YAML names none.
-      - -DLV_USE_SCALE=1
-      - -DGRID_COLS=${GRID_COLS}
-      - -DGRID_ROWS=${GRID_ROWS}
-      # The cells of a page when this screen stands up (firmware 0.2.92+). A board states both grids and the
-      # screen picks one at boot from its canvas, so one firmware serves a board either way round.
-      - -DGRID_COLS_PORTRAIT=${GRID_COLS_PORTRAIT}
-      - -DGRID_ROWS_PORTRAIT=${GRID_ROWS_PORTRAIT}
-      # The grids ESP Screens may give the screen (firmware 0.53.0+, looks/shared/grid.yaml): the tables are sized for the most.
-      - -DGRID_MIN_COLUMNS=${GRID_MIN_COLUMNS}
-      - -DGRID_MIN_ROWS=${GRID_MIN_ROWS}
-      - -DGRID_MAX_COLUMNS=${GRID_MAX_COLUMNS}
-      - -DGRID_MAX_ROWS=${GRID_MAX_ROWS}
-      - -DGRID_MAX_COLUMNS_PORTRAIT=${GRID_MAX_COLUMNS_PORTRAIT}
-      - -DGRID_MAX_ROWS_PORTRAIT=${GRID_MAX_ROWS_PORTRAIT}
-      # The ceilings of one screen (firmware 0.34.0+): page_protocol.h sizes every per-tile and per-page table from them.
-      - -DSCREEN_MAX_TILES=${SCREEN_MAX_TILES}
-      - -DSCREEN_MAX_PAGES=${SCREEN_MAX_PAGES}
-      - -DSCREEN_MAX_BAR_ITEMS=${SCREEN_MAX_BAR_ITEMS}
+  build_flags:
+    - -DLV_USE_SWITCH=1
+    # The sliders are all made in C++ now (a tile's strip, the blind's, the light and fan card's): ESPHome
+    # writes lv_conf.h from the widgets the YAML names, and since the brightness overlay left it there is no
+    # `slider:` left to name one (firmware 0.2.80).
+    - -DLV_USE_BAR=1
+    - -DLV_USE_SLIDER=1
+    # The band of a heat/cool range in the thermostat card (firmware 0.25.0) is LVGL's scale; the YAML names none.
+    - -DLV_USE_SCALE=1
+    - -DGRID_COLS=${GRID_COLS}
+    - -DGRID_ROWS=${GRID_ROWS}
+    # The cells of a page when this screen stands up (firmware 0.2.92+). A board states both grids and the
+    # screen picks one at boot from its canvas, so one firmware serves a board either way round.
+    - -DGRID_COLS_PORTRAIT=${GRID_COLS_PORTRAIT}
+    - -DGRID_ROWS_PORTRAIT=${GRID_ROWS_PORTRAIT}
+    # The grids ESP Screens may give the screen (firmware 0.53.0+, looks/shared/grid.yaml): the tables are sized for the most.
+    - -DGRID_MIN_COLUMNS=${GRID_MIN_COLUMNS}
+    - -DGRID_MIN_ROWS=${GRID_MIN_ROWS}
+    - -DGRID_MAX_COLUMNS=${GRID_MAX_COLUMNS}
+    - -DGRID_MAX_ROWS=${GRID_MAX_ROWS}
+    - -DGRID_MAX_COLUMNS_PORTRAIT=${GRID_MAX_COLUMNS_PORTRAIT}
+    - -DGRID_MAX_ROWS_PORTRAIT=${GRID_MAX_ROWS_PORTRAIT}
+    # The ceilings of one screen (firmware 0.34.0+): page_protocol.h sizes every per-tile and per-page table from them.
+    - -DSCREEN_MAX_TILES=${SCREEN_MAX_TILES}
+    - -DSCREEN_MAX_PAGES=${SCREEN_MAX_PAGES}
+    - -DSCREEN_MAX_BAR_ITEMS=${SCREEN_MAX_BAR_ITEMS}
   includes:
     - <esphome/components/smart_display/screen_input.h>
     - <esphome/components/smart_display/light_controls.h>
